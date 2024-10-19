@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import './styles.scss';
+import Header from "@/components/header";
+import { Layout } from "antd";
+import Main from "./components/main";
 
 
 const geistSans = localFont({
@@ -23,10 +27,16 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 {
     return (
         <html lang="en">
-            <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-                { children }
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <Layout className="app">
+
+                    <Header />
+
+                    <Main>
+                        { children }
+                    </Main>
+
+                </Layout>
             </body>
         </html>
     );

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "checkJs": false,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
@@ -18,9 +19,11 @@
       }
     ],
     "paths": {
-      "@/components/*": ["./*"]
+      "@/components/*": ["./app/components/*"],
+      "@/api/*": ["./app/api/*"],
+      "@/share/*": ["./app/share/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/homepage/page.tsx", "app/components/drawer/index.tsx"],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,10 @@
 
-export default function Home() {
+
+export default function Root()
+{
     return (
-        <></>
-    );
+        <>
+            
+        </>
+    )
 }
