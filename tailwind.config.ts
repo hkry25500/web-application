@@ -18,5 +18,8 @@ const config: Config = {
     },
   },
   plugins: [nextui()],
+  corePlugins: {
+    preflight: false
+  }
 };
 export default config;

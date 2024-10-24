@@ -1,9 +1,9 @@
 'use client'
 
 import dynamic from 'next/dynamic';
-import './styles.scss'
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { Switch } from '@nextui-org/switch';
 import axios from 'axios';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
@@ -13,55 +13,167 @@ export default function MoviePage()
     const params = useParams();
     const { id } = params;
 
+    const [movie, setMovie] = useState<any>();
+
     useEffect(() =>
     {
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        if (!movie)
+        {
+            axios.get('/api/movies')
+            .then(res => res.data)
+                .then((movies: any[]) => {
+                    movies.map(movie => {
+                        if (movie.id === id)
+                        {
+                            setMovie(movie);
+                        }
+                    });
+                })
+            .catch(err => console.error(err));
+        }
     },
-    []);
-
-    // const [isVideoReady, setVideoReady] = useState<boolean>(false);
-    // const [videoUrl, setVideoUrl] = useState<string>();
-
-    // useEffect(() =>
-    // {
-    //     if (id)
-    //     {
-    //         const fetchVideo = async () => {
-    //             const url = `http://192.168.3.12:8080/static/movie/${id}/stream?from=internal`;
-    //             try
-    //             {
-    //                 const response = await axios.get(url, {
-    //                     responseType: 'blob'
-    //                 });
-    //                 setVideoUrl(URL.createObjectURL(response.data));
-    //             }
-    //             catch (error)
-    //             {
-    //                 console.log('Error fetching video:', error);
-    //             }
-    //         };
-    
-    //         fetchVideo();
-    //     }
-    // }, [id]);
-
-    // useEffect(() => {
-    //     if (videoUrl)
-    //     {
-    //         setVideoReady(true);
-    //     }
-    // }, [videoUrl]);
+    [])
 
     return (
         <>
-            <div className="contain">
+
+            <div className="flex flex-col min-h-screen">
+
+                {/* Main */}
+                <main className="flex-1 bg-grey-lightest z-0 py-5 px-5">
+                    <div className="flex flex-wrap mx-auto">
+                        {/* main col */}
+                        <div className="w-full md:flex-1">
+                            {/* player */}
+                            <div className="bg-black relative mb-3" style={{ paddingTop: "55%" }}>
+                                <ReactPlayer
+                                    width='100%'
+                                    height='100%'
+                                    style={{ position: 'absolute', top:'0', left:'0', right:'0' }}
+                                    url={`${movie?.sources.internal.url}`}
+                                    controls
+                                    config={{ file: { 
+                                        attributes: {
+                                            controlsList: 'nodownload'
+                                        }
+                                    }}}
+                                />
+                            </div>
+                            {/* video info */}
+                            <div className="flex flex-wrap items-end">
+                                {/* title */}
+                                <div className="pb-2">
+                                    <h1 className="text-xl my-2">{ movie?.name }</h1>
+                                    <span className="text-base text-grey-darken">115 min</span>
+                                </div>
+                                {/* buttons actions */}
+                                <div className="ml-auto">
+                                    {/* likes */}
+                                    <div className="flex relative pb-2">
+                                    {/* like */}
+                                    <div className="flex items-center">
+                                        <svg
+                                        className="w-5 opacity-75"
+                                        viewBox="0 0 24 24"
+                                        preserveAspectRatio="xMidYMid meet"
+                                        focusable="false"
+                                        >
+                                        <g>
+                                            <path
+                                            d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"
+                                            className="style-scope yt-icon"
+                                            />
+                                        </g>
+                                        </svg>
+                                        <span className="text-xs text-grey-darken ml-1">1 300</span>
+                                    </div>
+                                    {/* hate */}
+                                    <div className="flex items-center ml-5">
+                                        <svg
+                                        className="w-5 opacity-75"
+                                        viewBox="0 0 24 24"
+                                        preserveAspectRatio="xMidYMid meet"
+                                        >
+                                        <g>
+                                            <path
+                                            d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v1.91l.01.01L1 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"
+                                            className="style-scope yt-icon"
+                                            />
+                                        </g>
+                                        </svg>
+                                        <span className="text-xs text-grey-darken ml-1">300</span>
+                                    </div>
+                                    <div className="absolute w-full h-1 bg-grey pin-b t-5 rounded-full overflow-hidden">
+                                        <div className="absolute pin-l pin-t w-3/4 h-full bg-grey-darkest" />
+                                    </div>
+                                    </div>
+                                </div>
+                                <hr className="w-full border-t m-0 mb-3 " />
+                            </div>
+                        </div>
+
+                        {/*  aside */}
+                        <aside className="w-full md:max-w-xs xl:max-w-full xl:w-1/4 md:pl-5 mt-5 md:mt-0">
+                            {/* up next */}
+                            <div className="w-full">
+                            <div className="flex w-full items-center justify-between mb-3">
+                                <span>Up Next</span>
+                                <div className="flex items-center">
+                                    <span className="text-sm mr-2">AUTOLAY</span>
+                                    <Switch size='sm' defaultSelected />
+                                    {/* <span className="text-sm mr-2">AUTOLAY</span>
+                                    <div className="bg-grey rounded-full w-8 h-3 flex items-center">
+                                        <span className="block rounded-full w-5 h-5 bg-blue-dark ml-auto" />
+                                    </div> */}
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap w-full">
+                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
+                                <div className="w-1/2 pl-2">
+                                <h3 className="text-base mb-2">Video upcoming title</h3>
+                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
+                                <p className="text-sm text-grey-darken mb-1">13K views</p>
+                                </div>
+                                <hr className="w-full my-4 border-t " />
+                            </div>
+                            <div className="flex flex-wrap w-full mb-3">
+                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
+                                <div className="w-1/2 pl-2">
+                                <h3 className="text-base mb-2">Video upcoming title</h3>
+                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
+                                <p className="text-sm text-grey-darken mb-1">13K views</p>
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap w-full mb-3">
+                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
+                                <div className="w-1/2 pl-2">
+                                <h3 className="text-base mb-2">Video upcoming title</h3>
+                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
+                                <p className="text-sm text-grey-darken mb-1">13K views</p>
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap w-full mb-3">
+                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
+                                <div className="w-1/2 pl-2">
+                                <h3 className="text-base mb-2">Video upcoming title</h3>
+                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
+                                <p className="text-sm text-grey-darken mb-1">13K views</p>
+                                </div>
+                            </div>
+                            </div>
+                        </aside>
+                    </div>
+                </main>
+            </div>
+
+            {/* <div className="contain">
                 <div id="video">
                     <div className="player">
                         {
                             <ReactPlayer
                                 width='100%'
                                 height='100%'
-                                url={`http://192.168.3.12:8080/static/movie/${id}/stream?from=internal`}
+                                url={`http://192.168.3.12:8080/static/movie/${id}/stream.m3u8?from=internal`}
                                 controls
                                 config={{ file: { 
                                     attributes: {
@@ -70,9 +182,6 @@ export default function MoviePage()
                                 }}}
                             />
                         }
-                        {/* <div className="content" id="player">
-
-                        </div> */}
                     </div>
                     <div className="list-block media-list" style={{ background: "#fff" }}>
                     <ul>
@@ -99,7 +208,6 @@ export default function MoviePage()
                                 The first technique is making sure you have the right gear for
                                 landscape photography.
                             </div>
-                            {/* <div class="item-text">Additional description text</div> */}
                             </div>
                         </div>
                         <div className="progressbar" data-progress={15}>
@@ -115,7 +223,6 @@ export default function MoviePage()
                 <div id="details">
                     <div className="content-block">
                     <div className="content-block-inner">
-                        {/*                 <span class="button" style="float: right;">Join Study Group</span> */}
                         <span style={{ float: "right", fontSize: 28 }}>
                         <i className="fa fa-bookmark-o color-cyan" />
                         </span>
@@ -173,7 +280,7 @@ export default function MoviePage()
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

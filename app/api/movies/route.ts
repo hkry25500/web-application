@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
-import hosts from '@/share/hosts.json'
+import hosts from '@/shared/hosts.json'
 
 
 export async function GET(_request: NextRequest)

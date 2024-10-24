@@ -26,7 +26,7 @@ export default function Homepage()
     return (
         <div className='w-full min-h-100-70'>
 
-            <h2>Most Popular Movies</h2>
+            <h2 className='subheader'>Most Popular Movies</h2>
 
             <section className="movies">
                 {
