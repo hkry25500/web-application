@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Switch } from '@nextui-org/switch';
 import axios from 'axios';
+import ChatBox from '@/components/chat-box';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 
@@ -42,6 +43,7 @@ export default function MoviePage()
                 {/* Main */}
                 <main className="flex-1 bg-grey-lightest z-0 py-5 px-5">
                     <div className="flex flex-wrap mx-auto">
+
                         {/* main col */}
                         <div className="w-full md:flex-1">
                             {/* player */}
@@ -116,52 +118,29 @@ export default function MoviePage()
                         <aside className="w-full md:max-w-xs xl:max-w-full xl:w-1/4 md:pl-5 mt-5 md:mt-0">
                             {/* up next */}
                             <div className="w-full">
-                            <div className="flex w-full items-center justify-between mb-3">
-                                <span>Up Next</span>
-                                <div className="flex items-center">
-                                    <span className="text-sm mr-2">AUTOLAY</span>
-                                    <Switch size='sm' defaultSelected />
-                                    {/* <span className="text-sm mr-2">AUTOLAY</span>
-                                    <div className="bg-grey rounded-full w-8 h-3 flex items-center">
-                                        <span className="block rounded-full w-5 h-5 bg-blue-dark ml-auto" />
-                                    </div> */}
+
+                                {/* <div className="flex w-full items-center justify-between mb-3">
+                                    <span>Up Next</span>
+                                    <div className="flex items-center">
+                                        <span className="text-sm mr-2">AUTOLAY</span>
+                                        <Switch size='sm' defaultSelected />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex flex-wrap w-full">
-                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
-                                <div className="w-1/2 pl-2">
-                                <h3 className="text-base mb-2">Video upcoming title</h3>
-                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
-                                <p className="text-sm text-grey-darken mb-1">13K views</p>
-                                </div>
-                                <hr className="w-full my-4 border-t " />
-                            </div>
-                            <div className="flex flex-wrap w-full mb-3">
-                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
-                                <div className="w-1/2 pl-2">
-                                <h3 className="text-base mb-2">Video upcoming title</h3>
-                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
-                                <p className="text-sm text-grey-darken mb-1">13K views</p>
-                                </div>
-                            </div>
-                            <div className="flex flex-wrap w-full mb-3">
-                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
-                                <div className="w-1/2 pl-2">
-                                <h3 className="text-base mb-2">Video upcoming title</h3>
-                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
-                                <p className="text-sm text-grey-darken mb-1">13K views</p>
-                                </div>
-                            </div>
-                            <div className="flex flex-wrap w-full mb-3">
-                                <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
-                                <div className="w-1/2 pl-2">
-                                <h3 className="text-base mb-2">Video upcoming title</h3>
-                                <p className="text-sm text-grey-darken mb-1">Chanel</p>
-                                <p className="text-sm text-grey-darken mb-1">13K views</p>
-                                </div>
-                            </div>
+                                <div className="flex flex-wrap w-full">
+                                    <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
+                                    <div className="w-1/2 pl-2">
+                                    <h3 className="text-base mb-2">Video upcoming title</h3>
+                                    <p className="text-sm text-grey-darken mb-1">Chanel</p>
+                                    <p className="text-sm text-grey-darken mb-1">13K views</p>
+                                    </div>
+                                    <hr className="w-full my-4 border-t " />
+                                </div> */}
+
+                                <ChatBox />
+
                             </div>
                         </aside>
+
                     </div>
                 </main>
             </div>
