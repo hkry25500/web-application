@@ -1,16 +1,46 @@
 'use client'
 
 import { Drawer, Menu } from "antd";
-import { HomeTwoTone } from '@ant-design/icons'
+import { HomeTwoTone, LogoutOutlined, UserAddOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { ItemType, MenuItemType } from "antd/es/menu/interface";
 
 
-const sidebarItems = [
+const sidebarItems = (status: "authenticated" | "loading" | "unauthenticated"): ItemType<MenuItemType>[]|any =>
+[
     {
-        key: 'home',
-        icon: <HomeTwoTone twoToneColor={'#f16018'} />,
-        label: <a href="/home">Home</a>
+        type: 'group',
+        key: 'nav',
+        label: 'Navigation',
+        children: [
+            {
+                key: 'home',
+                icon: <HomeTwoTone twoToneColor={'#f16018'} />,
+                label: <Link href='/home'>Home</Link>
+            }
+        ]
+    },
+    {
+        type: 'group',
+        key: 'account',
+        label: 'Account',
+        children: [
+            status==='unauthenticated' &&
+            {
+                key: 'signin',
+                label: <Link href='/auth/signin'>Sign in</Link>,
+                icon: <UserAddOutlined />
+            },
+            status==='authenticated' &&
+            {
+                key: 'signout',
+                label: <a role='button' onClick={() => signOut()}>Sign out</a>,
+                icon: <LogoutOutlined />
+            }
+        ].filter(Boolean)
     }
 ]
 
@@ -18,7 +48,6 @@ export default function Header()
 {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [currentKey, setCurrentKey] = useState<string>('');
-
     const pathname = usePathname();
 
     useEffect(() => {
@@ -31,7 +60,9 @@ export default function Header()
         {
             setCurrentKey('');
         }
-    },[])
+    },[pathname]);
+
+    const { status } = useSession();
 
     return (
         <>
@@ -61,7 +92,7 @@ export default function Header()
                         width: '100%',
                     }}
                     mode="vertical"
-                    items={sidebarItems}
+                    items={sidebarItems(status)}
                     selectedKeys={[currentKey]}
                 >
                 </Menu>

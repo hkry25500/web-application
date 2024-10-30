@@ -18,7 +18,6 @@ export async function GET(_request: NextRequest)
     }
 }
 
-export async function POST(request: NextRequest) {
-    const { title, year } = await request.json();
-    return NextResponse.json({ message: `Movie ${title} created.` });
+export async function POST(request: NextRequest)
+{
 }

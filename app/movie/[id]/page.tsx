@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import { Switch } from '@nextui-org/switch';
 import axios from 'axios';
 import ChatBox from '@/components/chat-box';
+import { useSession } from 'next-auth/react';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 
@@ -33,7 +34,14 @@ export default function MoviePage()
             .catch(err => console.error(err));
         }
     },
-    [])
+    []);
+
+    const { status } = useSession();
+
+    if (!status || status === 'unauthenticated')
+    {
+        return <></>
+    }
 
     return (
         <>
@@ -117,7 +125,7 @@ export default function MoviePage()
                         {/*  aside */}
                         <aside className="w-full md:max-w-xs xl:max-w-full xl:w-1/4 md:pl-5 mt-5 md:mt-0">
                             {/* up next */}
-                            <div className="w-full">
+                            <div className="w-full flex justify-center">
 
                                 {/* <div className="flex w-full items-center justify-between mb-3">
                                     <span>Up Next</span>

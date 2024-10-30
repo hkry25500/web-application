@@ -1,3 +1,4 @@
+import axios from "axios";
 import NextAuth from "next-auth"
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -14,7 +15,6 @@ const handler = NextAuth({
             // You can pass any HTML attribute to the <input> tag through the object.
             credentials: {
                 email: { label: "Email", type: "text", placeholder: "email@domain.com" },
-                username: { label: "Username", type: "text" },
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials, _req) {
@@ -24,22 +24,37 @@ const handler = NextAuth({
                 // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
                 // You can also use the `req` object to obtain additional parameters
                 // (i.e., the request IP address)
-                console.log(credentials);
-                const user = null;
+                if (credentials?.email && credentials.password)
+                {
+                    try
+                    {
+                        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/email/${credentials.email}`);
+                        const user = response.data;
 
-                // If no error and we have user data, return it
-                if (user) {
-                    return user
+                        if (user.password === credentials.password)
+                        {
+                            return user;
+                        }
+                        else
+                        {
+                            throw new Error('Password incorrect!');
+                        }
+                    }
+                    catch(error)
+                    {
+                        console.error(error);
+                        return null;
+                    }
                 }
-                
-                // Return null if user data could not be retrieved
-                return null
+                else
+                    return null;
             },
         }),
     ],
     pages: {
-        signIn: '/auth/login'
-    }
+        signIn: '/auth/signin'
+    },
+    secret: process.env.NEXTAUTH_SECRET,
 })
 
 export { handler as GET, handler as POST }

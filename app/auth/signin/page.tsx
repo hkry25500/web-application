@@ -1,11 +1,11 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import './styles.scss'
+import '../styles.scss'
 import { ChangeEvent, useState } from 'react';
 
 
-export default async function AuthPage()
+export default function SigninPage()
 {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
@@ -13,7 +13,7 @@ export default async function AuthPage()
 
     const handleLogin = () =>
     {
-        signIn('credentials', { redirect: false, email, password });
+        signIn('credentials', { email, password, callbackUrl: '/home' });
     }
 
     return (
@@ -33,7 +33,7 @@ export default async function AuthPage()
                             </svg>
                         </div>
 
-                        <h1>Login</h1>
+                        <h1>Sign in</h1>
                         <p className="body-text">See your growth and get consulting support!</p>
 
                         <a href="#" className="rounded-button google-login-button">
@@ -102,7 +102,7 @@ export default async function AuthPage()
                         </a>
                         <div className="register-div">
                             Not registered yet?{" "}
-                            <a href="#" className="link create-account">
+                            <a href="/auth/signup" className="link create-account">
                                 Create an account ?
                             </a>
                         </div>

@@ -6,6 +6,8 @@ import Header from "@/components/header";
 import Main from "./components/main";
 import Head from "next/head";
 import { ConfigProvider } from "antd";
+import { useRouter } from "next/router";
+import { Providers } from "./providers";
 
 
 const geistSans = localFont({
@@ -26,6 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>)
 {
+
     return (
         <html lang="en">
             <Head>
@@ -33,13 +36,18 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
             </Head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <div className="app">
-                    <ConfigProvider theme={{ token: { colorPrimary: '#f16018' } }}>
+                    <Providers>
+                        { children }
+                    </Providers>
+                    {/* <ConfigProvider theme={{ token: { colorPrimary: '#F16018' } }}>
+
                         <Header />
 
                         <Main>
                             { children }
                         </Main>
-                    </ConfigProvider>
+
+                    </ConfigProvider> */}
                 </div>
             </body>
         </html>
