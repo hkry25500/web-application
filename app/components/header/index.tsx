@@ -1,7 +1,7 @@
 'use client'
 
-import { Drawer, Menu } from "antd";
-import { HomeTwoTone, LogoutOutlined, UserAddOutlined } from '@ant-design/icons'
+import { Avatar, Drawer, Menu } from "antd";
+import { HomeTwoTone, LogoutOutlined, ProfileOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -31,8 +31,14 @@ const sidebarItems = (status: "authenticated" | "loading" | "unauthenticated"): 
             status==='unauthenticated' &&
             {
                 key: 'signin',
-                label: <Link href='/auth/signin'>Sign in</Link>,
+                label: <a href='/auth/signin'>Sign in</a>,
                 icon: <UserAddOutlined />
+            },
+            status==='authenticated' &&
+            {
+                key: 'profile',
+                label: <a href="/settings/profile">Profile</a>,
+                icon: <ProfileOutlined />
             },
             status==='authenticated' &&
             {
@@ -46,6 +52,8 @@ const sidebarItems = (status: "authenticated" | "loading" | "unauthenticated"): 
 
 export default function Header()
 {
+    const { status, data } = useSession();
+
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [currentKey, setCurrentKey] = useState<string>('');
     const pathname = usePathname();
@@ -62,8 +70,6 @@ export default function Header()
         }
     },[pathname]);
 
-    const { status } = useSession();
-
     return (
         <>
             <header>
@@ -74,9 +80,17 @@ export default function Header()
                 </div>
                 <nav onClick={() => setIsDrawerOpen(true)} />
                 <div className="search">
-                    <svg>
-                        <use xlinkHref="#ico-search" />
-                    </svg>
+                    {
+                        status==='authenticated' ?
+                            <Avatar
+                                size='large'
+                                src={`data:image/png;base64,${data?.user.avatar}`}
+                                />
+                            :
+                            <Avatar
+                                size='large'
+                                />
+                    }
                 </div>
             </header>
 

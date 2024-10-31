@@ -1,4 +1,5 @@
 import pool from "@/shared/pool";
+import { RowDataPacket } from "mysql2";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -8,13 +9,13 @@ export async function GET(req: NextRequest)
 
     try
     {
-        const query = `SELECT * FROM users WHERE email = $1::text`;
-        const res = await pool.query(query, [email]);
-
-        return NextResponse.json(res.rows[0]);
+        const query = `SELECT * FROM users WHERE email = '${email}'`;
+        const [rows] = await pool.query<RowDataPacket[]>(query);
+    
+        return NextResponse.json(rows[0]);
     }
     catch
     {
-        console.error('Database did not respond.')
+        return NextResponse.json({ success: false })
     }
 }

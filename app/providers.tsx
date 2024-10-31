@@ -7,6 +7,8 @@ import { SessionProvider } from 'next-auth/react';
 import { useRouter } from 'next/navigation'
 import Header from './components/header';
 import Main from './components/main';
+import { AntdRegistry } from '@ant-design/nextjs-registry'
+
 
 export function Providers({children}: { children: React.ReactNode }) {
 
@@ -16,13 +18,13 @@ export function Providers({children}: { children: React.ReactNode }) {
         <SessionProvider>
             <NextUIProvider navigate={router.push}>
                 <ConfigProvider theme={{ token: { colorPrimary: '#F16018' } }}>
+                    <AntdRegistry>
+                        <Header />
 
-                    <Header />
-
-                    <Main>
-                        { children }
-                    </Main>
-
+                        <Main>
+                            { children }
+                        </Main>
+                    </AntdRegistry>
                 </ConfigProvider>
             </NextUIProvider>
         </SessionProvider>

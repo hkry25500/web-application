@@ -1,22 +1,22 @@
 import pool from "@/shared/pool";
+import { RowDataPacket } from "mysql2";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 } from 'uuid';
 
 
-export async function GET(req: NextRequest)
+export async function GET(_req: NextRequest)
 {
     try
     {
         const query = `SELECT * FROM users`;
-        const res = await pool.query(query);
-        return NextResponse.json(res.rows);
+        const [rows] = await pool.query<RowDataPacket[]>(query);
+
+        return NextResponse.json(rows);
     }
     catch
     {
-
+        return NextResponse.json({ success: false });
     }
-
-    return NextResponse.json({});
 }
 
 export async function POST(req: NextRequest)
@@ -25,8 +25,9 @@ export async function POST(req: NextRequest)
 
     try
     {
-        const users_email_result = await pool.query(`SELECT * FROM users WHERE email=$1::text`, [email]);
-        users_email_result.rows.map(row =>
+        const [users_email_result] = await pool.query<RowDataPacket[]>(`SELECT * FROM users WHERE email='${email}'`);
+
+        users_email_result.map(row =>
         {
             if (row.email === email)
             {
@@ -34,15 +35,17 @@ export async function POST(req: NextRequest)
             }
         });
 
-        const uuid = v4();
-        console.log(uuid)
-        await pool.query(`INSERT INTO users(uid, name, email, password) VALUES($1::text, $2::text, $3::text, $4::text)`, [uuid, username, email, password]);
+        await pool.query(`INSERT INTO users(email, name, password) VALUES('${email}', '${username}', '${password}')`);
+
+        return NextResponse.json({ success: true });
     }
     catch(error)
     {
-        console.error(error);
-        return NextResponse.json({});
+        return NextResponse.json({ success: false, reason: error });
     }
+}
 
-    return NextResponse.json({})
+export async function PUT(req: NextRequest)
+{
+        
 }

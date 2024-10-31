@@ -18,7 +18,8 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: calc(100vh - 70px - 40px - 20px);
+	// height: calc(100vh - 70px - 40px - 20px);
+	height: calc(100% - 40px);
 	position: relative;
 	max-width: 350px;
 	overflow: hidden;
@@ -26,18 +27,13 @@
 	background-color: var(--theme-color);
 	transition: all 0.2s ease-in;
 
-	// @media (min-width: 1601px) {
-	// 	right: -610px;
-	// 	max-width: 600px;
+	// @media (max-width: 1219px) {
+	// 	height: calc(75vh - 70px - 40px - 20px)
 	// }
 
-	@media (max-width: 1219px) {
-		height: calc(75vh - 70px - 40px - 20px)
-	}
-
-	@media (max-width: 924px) {
-		height: calc(50vh - 70px - 40px - 20px)
-	}
+	// @media (max-width: 924px) {
+	// 	height: calc(50vh - 70px - 40px - 20px)
+	// }
 
 	.close-chat {
 		top: 5px;

@@ -1,4 +1,5 @@
 import pool from "@/shared/pool";
+import { RowDataPacket } from "mysql2";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -8,15 +9,13 @@ export async function GET(req: NextRequest)
 
     try
     {
-        const query = `SELECT * FROM users WHERE uid = $1::text`;
-        const res = await pool.query(query, [uid]);
+        const query = `SELECT * FROM users WHERE uid = ${uid}`;
+        const [rows] = await pool.query<RowDataPacket[]>(query, [uid]);
 
-        return NextResponse.json(res.rows[0]);
+        return NextResponse.json(rows[0]);
     }
     catch (error)
     {
-        
+        return NextResponse.json({ success: false });
     }
-
-    return NextResponse.json({});
 }

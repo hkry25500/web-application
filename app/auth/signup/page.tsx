@@ -3,6 +3,7 @@
 import { ChangeEvent, useState } from "react";
 import '../styles.scss'
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 
 export default function SigninPage()
@@ -12,9 +13,17 @@ export default function SigninPage()
     const [password, setPassword] = useState<string>();
     const [rememberMe, setRememberMe] = useState<boolean>(true);
 
+    const router = useRouter();
+
     const handleSignup = () =>
     {
         axios.post('/api/users', { email, username, password })
+            .then(res => {
+                if ((res.data as any).success)
+                {
+                    router.replace('/home');
+                }
+            })
     }
 
     return (
@@ -78,7 +87,7 @@ export default function SigninPage()
                             </a>
                         </div>
                         <a role='button' className="rounded-button login-cta cursor-pointer" onClick={handleSignup}>
-                            Login
+                            Register
                         </a>
                         <div className="register-div">
                             Already have one?{" "}

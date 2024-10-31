@@ -1,3 +1,4 @@
+import { IUser } from "@/shared/interfaces";
 import axios from "axios";
 import NextAuth from "next-auth"
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -17,13 +18,8 @@ const handler = NextAuth({
                 email: { label: "Email", type: "text", placeholder: "email@domain.com" },
                 password: { label: "Password", type: "password" }
             },
-            async authorize(credentials, _req) {
-                // You need to provide your own logic here that takes the credentials
-                // submitted and returns either a object representing a user or value
-                // that is false/null if the credentials are invalid.
-                // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-                // You can also use the `req` object to obtain additional parameters
-                // (i.e., the request IP address)
+            async authorize(credentials, _req)
+            {
                 if (credentials?.email && credentials.password)
                 {
                     try
@@ -55,6 +51,27 @@ const handler = NextAuth({
         signIn: '/auth/signin'
     },
     secret: process.env.NEXTAUTH_SECRET,
+    callbacks: {
+        async session({ session, token }): Promise<any>
+        {
+            if (token && session.user)
+            {
+                try
+                {
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/email/${session.user.email}`);
+                    session.user = response.data;
+
+                    return session;
+                }
+                catch (error)
+                {
+                    console.error('Error fetching user data:', error);
+                }
+            }
+            else
+                return session;
+        }
+    }
 })
 
 export { handler as GET, handler as POST }

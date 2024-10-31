@@ -125,27 +125,8 @@ export default function MoviePage()
                         {/*  aside */}
                         <aside className="w-full md:max-w-xs xl:max-w-full xl:w-1/4 md:pl-5 mt-5 md:mt-0">
                             {/* up next */}
-                            <div className="w-full flex justify-center">
-
-                                {/* <div className="flex w-full items-center justify-between mb-3">
-                                    <span>Up Next</span>
-                                    <div className="flex items-center">
-                                        <span className="text-sm mr-2">AUTOLAY</span>
-                                        <Switch size='sm' defaultSelected />
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap w-full">
-                                    <div className="w-1/2 bg-black" style={{ paddingTop: "30%" }} />
-                                    <div className="w-1/2 pl-2">
-                                    <h3 className="text-base mb-2">Video upcoming title</h3>
-                                    <p className="text-sm text-grey-darken mb-1">Chanel</p>
-                                    <p className="text-sm text-grey-darken mb-1">13K views</p>
-                                    </div>
-                                    <hr className="w-full my-4 border-t " />
-                                </div> */}
-
+                            <div className="w-full h-100-70 flex justify-center">
                                 <ChatBox />
-
                             </div>
                         </aside>
 
