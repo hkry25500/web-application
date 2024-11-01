@@ -1,7 +1,6 @@
 import pool from "@/shared/pool";
 import { RowDataPacket } from "mysql2";
 import { NextRequest, NextResponse } from "next/server";
-import { v4 } from 'uuid';
 
 
 export async function GET(_req: NextRequest)

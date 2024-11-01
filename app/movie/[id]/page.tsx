@@ -1,41 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { Switch } from '@nextui-org/switch';
-import axios from 'axios';
 import ChatBox from '@/components/chat-box';
 import { useSession } from 'next-auth/react';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 
-export default function MoviePage()
+export default function MoviePage({ movie }: any)
 {
-    const params = useParams();
-    const { id } = params;
-
-    const [movie, setMovie] = useState<any>();
-
-    useEffect(() =>
-    {
-        if (!movie)
-        {
-            axios.get('/api/movies')
-            .then(res => res.data)
-                .then((movies: any[]) => {
-                    movies.map(movie => {
-                        if (movie.id === id)
-                        {
-                            setMovie(movie);
-                        }
-                    });
-                })
-            .catch(err => console.error(err));
-        }
-    },
-    []);
-
     const { status } = useSession();
 
     if (!status || status === 'unauthenticated')
@@ -45,7 +17,6 @@ export default function MoviePage()
 
     return (
         <>
-
             <div className="flex flex-col min-h-screen">
 
                 {/* Main */}

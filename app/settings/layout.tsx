@@ -22,10 +22,13 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
         const lastElement = pathname.split('/').filter(Boolean).pop() || '';
         if (lastElement === 'settings')
         {
+            document.title = 'Settings - Daily Movie'
             setCurrentKey('');
         }
         else
         {
+            const currentLocation = lastElement.charAt(0).toUpperCase() + lastElement.slice(1);
+            document.title = `${currentLocation} - Daily Movie`;
             setCurrentKey(lastElement);
         }
     },

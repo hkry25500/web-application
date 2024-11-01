@@ -154,7 +154,7 @@ const getBase64 = (file: Blob) =>
         reader.readAsDataURL(file);
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
-});
+    });
 
 const uploadButton = (
     <button

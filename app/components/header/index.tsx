@@ -4,7 +4,6 @@ import { Avatar, Drawer, Menu } from "antd";
 import { HomeTwoTone, LogoutOutlined, ProfileOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
 
@@ -19,7 +18,7 @@ const sidebarItems = (status: "authenticated" | "loading" | "unauthenticated"): 
             {
                 key: 'home',
                 icon: <HomeTwoTone twoToneColor={'#f16018'} />,
-                label: <Link href='/home'>Home</Link>
+                label: <a href='/home'>Home</a>
             }
         ]
     },
