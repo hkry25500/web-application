@@ -1,54 +1,30 @@
-'use client'
-
-import { useEffect, useState } from 'react';
 import './styles.scss'
-import axios from 'axios';
 import { Rate } from 'antd';
 
 
-export default function Homepage()
+async function fetchMovies()
 {
-    const [movies, setMovies] = useState<any[]>();
-
-    useEffect(() =>
+    try
     {
-        if (!movies)
-        {
-            axios.get('/api/movies')
-            .then(res => res.data)
-                .then(movies => {
-                    setMovies(movies);
-                })
-            .catch(err => console.error(err));
-        }
-    },
-    []);
+        const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/movies');
+        const movies = await response.json();
+
+        return movies;
+    }
+    catch
+    {
+        console.error('Error fetching movies.')
+    }
+}
+
+export default async function Homepage()
+{
+    const movies: any[] = await fetchMovies();
 
     return (
         <div className='w-full min-h-100-70'>
 
             <h2 className='subheader'>Most Popular Movies</h2>
-
-            {/* <section className="movies">
-                {
-                    movies?.map(movie => {
-                        return (
-                            <div className="movie" onClick={() => location.href = `/movie/${movie.id}`}>
-                                <img
-                                    src={movie.poster.url}
-                                    alt={movie.name}
-                                    className="poster"
-                                />
-                                <div className="title">{ movie.name }</div>
-                                <div className="info">
-                                    <span className="length">117 min</span>
-                                    <span className="year">2015</span>
-                                </div>
-                            </div>
-                        )
-                    })
-                }
-            </section> */}
 
             <div className="wrapper">
                 {
@@ -74,7 +50,7 @@ export default function Homepage()
                                     <span className="tag blue">Drama</span>
                                 </div>
                                 <p className="desc">
-                                    { movie.description }
+                                    { (movie.description.length>64)?`${movie.description.substring(0,61)}...`:movie.description }
                                 </p>
                                 <div className="cast">
                                     <h3>Cast</h3>

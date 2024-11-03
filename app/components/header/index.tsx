@@ -72,22 +72,28 @@ export default function Header()
     return (
         <>
             <header>
+                <nav onClick={() => setIsDrawerOpen(true)} />
                 <div>
                     <h1>
                         Daily<strong>MOVIE</strong>
                     </h1>
                 </div>
-                <nav onClick={() => setIsDrawerOpen(true)} />
-                <div className="search">
+                <div className="search flex items-center gap-4">
+                    {
+                        status==='unauthenticated' && <p>Sign in</p>
+                    }
                     {
                         status==='authenticated' ?
                             <Avatar
                                 size='large'
                                 src={`data:image/png;base64,${data?.user.avatar}`}
+                                onClick={() => location.href = '/settings/profile'}
                                 />
                             :
                             <Avatar
                                 size='large'
+                                src='/images/user.svg'
+                                onClick={() => location.href = '/auth/signin'}
                                 />
                     }
                 </div>

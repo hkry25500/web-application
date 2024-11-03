@@ -1,5 +1,6 @@
-import pool from "@/shared/pool";
-import { RowDataPacket } from "mysql2";
+import { db } from '@/lib/db';
+import { usersTable } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -7,10 +8,9 @@ export async function GET(_req: NextRequest)
 {
     try
     {
-        const query = `SELECT * FROM users`;
-        const [rows] = await pool.query<RowDataPacket[]>(query);
+        const users = await db.select().from(usersTable);
 
-        return NextResponse.json(rows);
+        return NextResponse.json(users);
     }
     catch
     {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest)
 
     try
     {
-        const [users_email_result] = await pool.query<RowDataPacket[]>(`SELECT * FROM users WHERE email='${email}'`);
+        const users_email_result = await db.select().from(usersTable).where(eq(usersTable.email, email));
 
         users_email_result.map(row =>
         {
@@ -34,7 +34,11 @@ export async function POST(req: NextRequest)
             }
         });
 
-        await pool.query(`INSERT INTO users(email, name, password) VALUES('${email}', '${username}', '${password}')`);
+        await db.insert(usersTable).values({
+            email: email,
+            name: username,
+            password: password,
+        })
 
         return NextResponse.json({ success: true });
     }
