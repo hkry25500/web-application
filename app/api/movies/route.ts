@@ -8,15 +8,12 @@ export async function GET(_request: NextRequest)
 {
     try
     {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_CONTENT_URL}/static/movies`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_CONTENT_URL}/movies`);
+
         return NextResponse.json(response.data, { status: 200 });
     }
     catch
     {
         return NextResponse.json({  }, { status: 500 });
     }
-}
-
-export async function POST(request: NextRequest)
-{
 }

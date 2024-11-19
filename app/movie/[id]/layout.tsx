@@ -6,20 +6,13 @@ const fetchMovie = async (id: string): Promise<any> =>
 {
     try
     {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/movies`);
-        const movies: any[] = response.data;
-        const movie = movies.find(movie => movie.id === id);
-    
-        if (movie) {
-            return movie;
-        } else {
-            throw new Error('Movie not found');
-        }
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/movies/${id}`);
+        return response.data;
     }
-    catch (error)
+    catch
     {
-        console.error('Movie did not exist.', error);
-        throw error;
+        console.error('Movie did not exist.');
+        return null;
     }
 }
 
@@ -28,17 +21,21 @@ export async function generateMetadata({ params }: any)
     const movie = await fetchMovie(params.id);
 
     return {
-        title: `${movie.name} - Daily Movie`
+        title: movie ? movie.title : "Movie not found"
     }
 }
 
-export default async function MovieLayout({ params }: Readonly<{ params: any }>)
+export default async function MovieLayout({ params }: any)
 {
     const movie = await fetchMovie(params.id);
 
-    return (
-        <>
-            <MoviePage movie={movie} />
-        </>
-    )
+    if (movie) {
+        return (
+            <>
+                <MoviePage movie={movie} />
+            </>
+        )
+    }
+    else
+        return <></>
 }

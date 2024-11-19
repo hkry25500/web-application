@@ -17,7 +17,7 @@ export default function SigninPage()
     }
 
     return (
-        <div id='login-page' className={`bg-[url('https://singh-cp.github.io/netflix-landingpage/images/netflix-background-image.jpg')]`}>
+        <div id='auth-page' className={`bg-[url('https://singh-cp.github.io/netflix-landingpage/images/netflix-background-image.jpg')]`}>
             <div className="login-container">
 
                 <div className="login-form">

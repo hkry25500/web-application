@@ -20,10 +20,11 @@ export const POST = async (req: NextRequest) =>
         {
             await db.update(usersTable).set({ avatar: base64String }).where(eq(usersTable.uid, parseInt(uid)))
         }
-        catch
+        catch(err)
         {
             return NextResponse.json({
                 success: false,
+                reason: err,
             });
         }
 

@@ -1,7 +1,6 @@
-import { IUser } from "@/shared/interfaces";
 import axios from "axios";
-import NextAuth from "next-auth"
-import CredentialsProvider from 'next-auth/providers/credentials'
+import NextAuth, { User } from "next-auth";
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 
 const handler = NextAuth({
@@ -29,7 +28,7 @@ const handler = NextAuth({
 
                         if (user.password === credentials.password)
                         {
-                            return user;
+                            return { id: user.uid, email: user.email } as User;
                         }
                         else
                         {
@@ -52,13 +51,17 @@ const handler = NextAuth({
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
+        async jwt({ token })
+        {
+            return token;
+        },
         async session({ session, token }): Promise<any>
         {
             if (token && session.user)
             {
                 try
                 {
-                    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/email/${session.user.email}`);
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/uid/${token.sub}`);
                     session.user = response.data;
 
                     return session;
@@ -70,8 +73,8 @@ const handler = NextAuth({
             }
             else
                 return session;
-        }
-    }
+        },
+    },
 })
 
 export { handler as GET, handler as POST }

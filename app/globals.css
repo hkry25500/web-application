@@ -8,6 +8,39 @@
   }
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --foreground-color-primary: #000;
+  --foreground-color-secondary: #333;
+  --background-color-primary: #FFF;
+  --background-color-secondary: #F1F2F3;
+  --accent-color-primary: #F16018;
+  --accent-color-secondary: #F5C518;
+  --text-color-primary: #18191C;
+  --text-color-secondary: #9499A0;
+  --border-color-secondary: #E3E5E7;
+
+  --plyr-color-main: #f18f35;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  overflow-x: hidden;
+}
+
 .min-h-100-70 {
   min-height: calc(100vh - 70px) !important;
 }
@@ -27,6 +60,7 @@
 
 .text-logo-container h1 {
   font-size: 20px;
+  font-weight: 700;
   text-transform: uppercase;
   text-align: center;
   color: #1c222b;
@@ -44,3 +78,7 @@
   top: -1px;
   left: 2px;
 }
+
+/* .plyr__poster {
+  pointer-events: none;
+} */

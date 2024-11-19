@@ -9,15 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
+      colors: {},
     },
   },
-  plugins: [nextui()],
   corePlugins: {
-    preflight: false
-  }
+    preflight: true
+  },
+  plugins: [nextui()],
 };
 export default config;

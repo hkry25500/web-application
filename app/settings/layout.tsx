@@ -49,7 +49,7 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                         />
                     </Sider>
 
-                    <div className='w-full px-10 pt-2'>
+                    <div className='w-full px-10'>
                         { children }
                     </div>
 

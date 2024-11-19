@@ -1,41 +1,10 @@
-/*--------------------
-Body
---------------------*/
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
 
-body {
-    width: 100%;
-    min-height: 100vh;
-    margin: 0;
-}
 
 @mixin center {
     position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-
-/*--------------------
-App
---------------------*/
-.app {
-    width: 100%;
-    min-height: 100vh;
-    background: #fff;
-    overflow-x: hidden;
-
-    .subheader {
-        color: #525661;
-        font-size: 17px;
-        padding: 20px 28px 0;
-        margin: 0;
-    }
 }
 
 
@@ -53,12 +22,13 @@ header {
 
     h1 {
         font-size: 20px;
+        font-weight: 700;
         text-transform: uppercase;
         text-align: center;
         color: #1c222b;
 
         strong {
-          background: #F16018;
+          background: var(--accent-color-primary);
           color: #fff;
           display: inline-block;
           border-radius: 30px;

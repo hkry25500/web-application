@@ -19,11 +19,13 @@ export function Providers({children}: { children: React.ReactNode }) {
             <NextUIProvider navigate={router.push}>
                 <ConfigProvider theme={{ token: { colorPrimary: '#F16018' } }}>
                     <AntdRegistry>
+
                         <Header />
 
                         <Main>
                             { children }
                         </Main>
+
                     </AntdRegistry>
                 </ConfigProvider>
             </NextUIProvider>

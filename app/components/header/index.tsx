@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
+import './styles.scss'
 
 
 const sidebarItems = (status: "authenticated" | "loading" | "unauthenticated"): ItemType<MenuItemType>[]|any =>
@@ -17,7 +18,7 @@ const sidebarItems = (status: "authenticated" | "loading" | "unauthenticated"): 
         children: [
             {
                 key: 'home',
-                icon: <HomeTwoTone twoToneColor={'#f16018'} />,
+                icon: <HomeTwoTone twoToneColor={'#F16018'} />,
                 label: <a href='/home'>Home</a>
             }
         ]
