@@ -62,7 +62,7 @@ export default function ProfilePage()
     return (
         <div className='w-full'>
             <p
-            className="site-description-item-profile-p-title text-4xl font-normal font-['cursive'] my-6"
+            className="site-description-item-profile-p-title text-2xl font-medium font-serif my-6"
             >
                 User Profile
             </p>
