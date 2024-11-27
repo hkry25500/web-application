@@ -33,7 +33,7 @@ export default function SigninPage()
                             </svg>
                         </div>
 
-                        <h1>Sign in</h1>
+                        <h1 className="text-2xl font-bold">Sign in</h1>
                         <p className="body-text">See your growth and get consulting support!</p>
 
                         <a href="#" className="rounded-button google-login-button">

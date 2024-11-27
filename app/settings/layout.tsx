@@ -7,9 +7,10 @@ import { ProfileOutlined, ControlOutlined } from '@ant-design/icons'
 import './index.css'
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { WEBAPP_TITLE } from "@/shared/constants";
+
 
 const { Sider } = Layout;
-
 
 export default function SettingsLayout({ children, }: Readonly<{ children: React.ReactNode; }>)
 {
@@ -22,13 +23,13 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
         const lastElement = pathname.split('/').filter(Boolean).pop() || '';
         if (lastElement === 'settings')
         {
-            document.title = 'Settings - Daily Movie'
+            document.title = `Settings - ${WEBAPP_TITLE}`
             setCurrentKey('');
         }
         else
         {
             const currentLocation = lastElement.charAt(0).toUpperCase() + lastElement.slice(1);
-            document.title = `${currentLocation} - Daily Movie`;
+            document.title = `${currentLocation} - ${WEBAPP_TITLE}`;
             setCurrentKey(lastElement);
         }
     },

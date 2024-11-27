@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
 import './styles.scss'
+import Logo from "../logo";
 
 
 const sidebarItems = (status: "authenticated" | "loading" | "unauthenticated"): ItemType<MenuItemType>[]|any =>
@@ -74,14 +75,12 @@ export default function Header()
         <>
             <header>
                 <nav onClick={() => setIsDrawerOpen(true)} />
-                <div>
-                    <h1>
-                        Daily<strong>MOVIE</strong>
-                    </h1>
-                </div>
+
+                <Logo />
+
                 <div className="search flex items-center gap-4">
                     {
-                        status==='unauthenticated' && <p>Sign in</p>
+                        status==='unauthenticated' && <p className="text-sm text-[var(--text-color-primary)]">Sign in</p>
                     }
                     {
                         status==='authenticated' ?
@@ -100,7 +99,7 @@ export default function Header()
                 </div>
             </header>
 
-            <Drawer title={<SidebarTitleLogo />}
+            <Drawer title={<Logo className='flex justify-start items-center ml-4' />}
                     open={isDrawerOpen}
                     size="default"
                     onClose={() => setIsDrawerOpen(false)}
@@ -118,16 +117,5 @@ export default function Header()
                 </Menu>
             </Drawer>
         </>
-    )
-}
-
-const SidebarTitleLogo = (): React.ReactNode =>
-{
-    return (
-        <div className="text-logo-container ml-3">
-            <h1>
-                Daily<strong>MOVIE</strong>
-            </h1>
-        </div>
     )
 }

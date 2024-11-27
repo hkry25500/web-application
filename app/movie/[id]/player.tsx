@@ -44,10 +44,15 @@ export default function MoviePlayer({ movie }: {
             title: movie.title,
             sources: [
                 {
-                    src: movie.stream.mp4.url,
+                    src: `${movie.stream.url}/720p.mp4`,
+                    type: 'video/mp4',
+                    size: 720,
+                },
+                {
+                    src: `${movie.stream.url}/1080p.mp4`,
                     type: 'video/mp4',
                     size: 1080,
-                },
+                }
             ],
             poster: movie.poster.url,
             tracks: movie.tracks,

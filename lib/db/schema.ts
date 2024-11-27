@@ -1,4 +1,4 @@
-import { char, float, int, longtext, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { char, float, int, longtext, mysqlTable, text, varchar } from "drizzle-orm/mysql-core";
 
 
 export const usersTable = mysqlTable('users', {
@@ -22,4 +22,10 @@ export const moviesTable = mysqlTable('movies', {
     source: longtext('source').notNull(),
     stream: longtext('stream').notNull(),
     tracks: longtext('tracks').notNull(),
+});
+
+export const commentsTable = mysqlTable('comments', {
+    movieId: varchar('movie_id', { length: 255 }).notNull(),
+    userId: int('user_id').notNull(),
+    content: text('content').notNull(),
 });

@@ -1,0 +1,21 @@
+.text-logo-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.text-logo-container h1 {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: sans-serif;
+    text-align: center;
+    color: #1c222b;
+}
+
+.text-logo-container h1 strong {
+    color: #F16018;
+    display: inline-block;
+    font-weight: 700;
+    line-height: 1;
+    position: relative;
+}

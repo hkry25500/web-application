@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from "react";
 import '../styles.scss'
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 
 export default function SigninPage()
@@ -21,7 +22,7 @@ export default function SigninPage()
             .then(res => {
                 if ((res.data as any).success)
                 {
-                    router.replace('/home');
+                    signIn('credentials', { email, password, callbackUrl: '/home' })
                 }
             })
     }
@@ -43,9 +44,8 @@ export default function SigninPage()
                             </svg>
                         </div>
 
-                        <h1>Sign up</h1>
+                        <h1 className="text-2xl font-bold">Sign up</h1>
                         <p className="body-text">See your growth and get consulting support!</p>
-                        
 
                         <div className="login-form-group mt-10">
                             <label htmlFor="email">

@@ -78,7 +78,6 @@
 
 				&:hover {
 					cursor: pointer;
-					color: var(--accent-color-primary);
 				}
 			}
 
@@ -166,29 +165,6 @@
 			align-items: center;
 			justify-content: space-between;
 
-			> div {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-
-				i {
-					padding: 5px;
-					color: var(--foreground-color-secondary);
-					border: solid 1px transparent;
-					transition: all 0.2s ease-in;
-
-					&:last-of-type {
-						margin-right: 10px;
-					}
-
-					&:hover {
-						cursor: pointer;
-						border-color: var(--foreground-color-secondary);
-						box-shadow: 0 0 6px 0 var(--foreground-color-secondary);
-					}
-				}
-			}
-
 			button {
 				width: 100%;
 				height: 40px;
@@ -206,7 +182,7 @@
 					cursor: pointer;
 					background-color: var(--accent-color-primary);
 					border-color: var(--accent-color-primary);
-					box-shadow: 0 0 6px 0 var(--foreground-color-secondary);
+					box-shadow: 0 0 6px 0 var(--shadow-color-primary);
 				}
 			}
 		}
