@@ -1,57 +1,32 @@
 {
   "compilerOptions": {
-    // Emit Configuration
-    "noEmit": true,
-
-    // Type Checking Configuration
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitThis": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitOverride": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    
-    // Strict Rules - v4.8
-    "alwaysStrict": true,
-    "strictBindCallApply": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true,
-
-    // Modules Configuration
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["src/*"],
-      "@constants/*": ["constants/*"],
-      "@pages/*": ["pages/*"],
-      "@components/*": ["components/*"],
-      "@redux/*": ["redux/*"],
-      "@apis/*": ["apis/*"],
-      "@shared/*": ["shared/*"],
-      "@i18n/*": ["i18n/*",]
-    },
-    "module": "ES2022",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-
-    // Language and Environment Configuration
-    "target": "ES2022",
-    "jsx": "react-jsx",
-
-    // JavaScript Support Configuration
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": false,
-
-    // Interop Constraints Configuration
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["./app/components/*"],
+      "@/api/*": ["./app/api/*"],
+      "@/shared/*": ["./app/shared/*"],
+      "@/lib/*": ["./lib/*"],
+    }
   },
-  "include": ["src/**/**/*"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/home/page.tsx", "app/components/drawer/index.tsx"],
   "exclude": ["node_modules"]
 }

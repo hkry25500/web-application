@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --foreground-color-primary: #000;
+  --foreground-color-secondary: #333;
+  --background-color-primary: #FFF;
+  --background-color-secondary: #F1F2F3;
+  --accent-color-primary: #F16018;
+  --accent-color-secondary: #F5C518;
+  --text-color-primary: #18191C;
+  --text-color-secondary: #9499A0;
+  --shadow-color-primary: #333;
+  --shadow-color-secondary: #1f232826;
+  --border-color-secondary: #E3E5E7;
+
+  --plyr-color-main: #f18f35;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+.min-h-100-70 {
+  min-height: calc(100vh - 70px) !important;
+}
+
+.h-100-70 {
+  height: calc(100vh - 70px) !important;
+}
+
+/* 自定义滑块头样式 */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-color-primary);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-color-primary);
+  cursor: pointer;
+}
