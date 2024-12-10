@@ -13,7 +13,7 @@ export async function GET(req: NextRequest)
         if (email)
         {
             const users = await db.select().from(usersTable).where(eq(usersTable.email, email))
-    
+
             return NextResponse.json(users[0]);
         }
         else
@@ -21,6 +21,6 @@ export async function GET(req: NextRequest)
     }
     catch
     {
-        return NextResponse.json({ success: false })
+        return NextResponse.json({ success: false }, { status: 500 })
     }
 }

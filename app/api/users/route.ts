@@ -14,7 +14,7 @@ export async function GET(_req: NextRequest)
     }
     catch
     {
-        return NextResponse.json({ success: false });
+        return NextResponse.json({ success: false }, { status: 500 });
     }
 }
 
@@ -44,11 +44,22 @@ export async function POST(req: NextRequest)
     }
     catch(error)
     {
-        return NextResponse.json({ success: false, reason: error });
+        return NextResponse.json({ success: false, reason: error }, { status: 500 });
     }
 }
 
 export async function PUT(req: NextRequest)
 {
-        
+    const formData = await req.json();
+
+    try
+    {
+        await db.update(usersTable).set(formData).where(eq(usersTable.uid, formData.uid));
+    }
+    catch
+    {
+        return NextResponse.json({ success: false }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
 }
