@@ -4,9 +4,9 @@ import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export const POST = async (req: NextRequest) =>
+export const POST = async (req: NextRequest, props: any) =>
 {
-    const uid = req.nextUrl.pathname.split('/').pop();
+    const uid = (await props.params).uid;
     const formData = await req.formData();
     const body = Object.fromEntries(formData);
     const file = (body.file as Blob) || null;

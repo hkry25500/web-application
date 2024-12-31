@@ -21,7 +21,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </head>
             <body className={`antialiased`}>
-                <div className="app">
+                <div className="bg-white dark:bg-gray-950 min-h-screen overflow-x-hidden">
                     <Providers>
                         { children }
                     </Providers>

@@ -1,24 +1,19 @@
 // app/providers.tsx
 'use client'
 
-import { NextUIProvider } from '@nextui-org/react'
 import { ConfigProvider } from 'antd';
 import { SessionProvider } from 'next-auth/react';
-import { useRouter } from 'next/navigation'
 import Header from './components/header';
 import Main from './components/main';
-import { AntdRegistry } from '@ant-design/nextjs-registry'
+import usePreferencesStore from '@/lib/zustand/usePreferencesStore';
+import { useEffect, useState } from 'react';
 
 
-export function Providers({children}: { children: React.ReactNode }) {
-
-    const router = useRouter();
-
+export function Providers({ children }: { children: React.ReactNode }) {
     return (
-        <SessionProvider>
-            <NextUIProvider navigate={router.push}>
+        <ThemeProvider>
+            <SessionProvider>
                 <ConfigProvider theme={{ token: { colorPrimary: '#F16018' } }}>
-                    <AntdRegistry>
 
                         <Header />
 
@@ -26,9 +21,37 @@ export function Providers({children}: { children: React.ReactNode }) {
                             { children }
                         </Main>
 
-                    </AntdRegistry>
                 </ConfigProvider>
-            </NextUIProvider>
-        </SessionProvider>
+            </SessionProvider>
+        </ThemeProvider>
     )
+}
+
+function ThemeProvider({ children }: {
+    children: React.ReactNode
+}) {
+    const theme = usePreferencesStore((state: any) => state.theme);
+    const [isDone, setIsDone] = useState(false);
+
+    useEffect(() => {
+        if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            setIsDone(true);
+        }
+        else if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            setIsDone(true);
+        }
+    }, [theme]);
+
+    if (isDone) {
+        return (
+            <>
+                { children }
+            </>
+        )
+    }
+    else {
+        return <></>
+    }
 }

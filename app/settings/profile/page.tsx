@@ -134,19 +134,20 @@ export default function ProfilePage()
 
     return (
         <div className='w-full'>
-            <h4 className="text-3xl font-normal">Public profile</h4>
-            <Divider />
-            <div className="mt-4">
+
+            <h4 className="text-black dark:text-gray-200 text-2xl font-normal">Public profile</h4>
+            <hr className="w-full h-px bg-[var(--border-color-secondary)] dark:bg-gray-700 border-0 m-0 my-3" />
+            <div className="mt-5">
                 <div className="mt-5 md:mt-0">
                     <form onSubmit={onSubmit}>
                         <div className="overflow-hidden">
-                            <div className="py-6">
+                            <div>
                                 <div className="grid grid-cols-6 gap-6">
                                     <div className="col-span-6 md:col-span-3 grid grid-cols-4 gap-8">
                                         <div className="col-span-4">
                                             <label
                                             htmlFor="name"
-                                            className="block text-sm font-medium text-gray-700"
+                                            className="block text-sm font-medium text-gray-700 dark:text-gray-50"
                                             >
                                                 Name
                                             </label>
@@ -155,15 +156,16 @@ export default function ProfilePage()
                                             name="name"
                                             id="name"
                                             autoComplete="given-name"
-                                            className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 border border-gray-300 focus-visible:outline-none focus-visible:border-gray-500"
+                                            className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 outline-none border border-gray-300 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white"
                                             value={profileFormData.name}
-                                            onChange={onFormDataChange}
+                                            placeholder="Your name"
+                                            onChange={onFormDataChange }
                                             />
                                         </div>
                                         <div className="col-span-4">
                                             <label
                                             htmlFor="email"
-                                            className="block text-sm font-medium text-gray-700"
+                                            className="block text-sm font-medium text-gray-700 dark:text-gray-50"
                                             >
                                                 Email address
                                             </label>
@@ -172,15 +174,16 @@ export default function ProfilePage()
                                             name="email"
                                             id="email"
                                             autoComplete="email"
-                                            className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 border border-gray-300 focus-visible:outline-none focus-visible:border-gray-500"
+                                            className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 outline-none border border-gray-300 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white"
                                             value={profileFormData.email}
+                                            placeholder="Your email"
                                             onChange={onFormDataChange}
                                             />
                                         </div>
                                         <div className="col-span-4 md:col-span-2">
                                             <label
                                             htmlFor="country"
-                                            className="block text-sm font-medium text-gray-700"
+                                            className="block text-sm font-medium text-gray-700 dark:text-gray-50"
                                             >
                                                 Country / Region
                                             </label>
@@ -188,7 +191,7 @@ export default function ProfilePage()
                                             id="country"
                                             name="country"
                                             autoComplete="country"
-                                            className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus-visible:outline-none focus-visible:border-gray-500"
+                                            className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm sm:text-sm outline-none dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white"
                                             >
                                                 <option>United States</option>
                                                 <option>Canada</option>
@@ -203,14 +206,14 @@ export default function ProfilePage()
                                             </select>
                                         </div>
                                         <div className="col-span-4 md:col-span-2">
-                                            <label htmlFor="age" className="block text-sm font-medium text-gray-700">
+                                            <label htmlFor="age" className="block text-sm font-medium text-gray-700 dark:text-gray-50">
                                                 Age
                                             </label>
                                             <input
                                                 type="text"
                                                 id="age"
                                                 placeholder="Optional"
-                                                className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 border border-gray-300 focus-visible:outline-none focus-visible:border-gray-500"
+                                                className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 outline-none border border-gray-300 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white"
                                             />
                                         </div>
                                     </div>
@@ -241,7 +244,7 @@ export default function ProfilePage()
                                 </div>
                                 <div className="grid grid-cols-5 gap-8 mt-8">
                                     <div className="col-span-5 md:col-span-3">
-                                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700 dark:text-gray-50">
                                             Street address
                                         </label>
                                         <input
@@ -250,13 +253,13 @@ export default function ProfilePage()
                                         id="street_address"
                                         autoComplete="street-address"
                                         placeholder="Optional"
-                                        className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 border border-gray-300 focus-visible:outline-none focus-visible:border-gray-500"
+                                        className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 outline-none border border-gray-300 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white"
                                         />
                                     </div>
                                     <div className="col-span-5 md:col-span-3">
                                         <label
                                         htmlFor="city"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-sm font-medium text-gray-700 dark:text-gray-50"
                                         >
                                         City
                                         </label>
@@ -265,13 +268,13 @@ export default function ProfilePage()
                                         name="city"
                                         id="city"
                                         placeholder="Optional"
-                                        className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 border border-gray-300 focus-visible:outline-none focus-visible:border-gray-500"
+                                        className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 outline-none border border-gray-300 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white"
                                         />
                                     </div>
                                     <div className="col-span-5 md:col-span-3">
                                         <label
                                         htmlFor="state"
-                                        className="block text-sm font-medium text-gray-700"
+                                        className="block text-sm font-medium text-gray-700 dark:text-gray-50"
                                         >
                                         State / Province
                                         </label>
@@ -280,12 +283,12 @@ export default function ProfilePage()
                                         name="state"
                                         id="state"
                                         placeholder="Optional"
-                                        className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 border border-gray-300 focus-visible:outline-none focus-visible:border-gray-500"
+                                        className="mt-1 block w-full shadow-sm text-sm rounded-md py-2 px-3 outline-none border border-gray-300 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white"
                                         />
                                     </div>
                                 </div>
                             </div>
-                            <div className="ml-1 py-4 text-left">
+                            <div className="ml-1 py-8 text-left">
                                 <button
                                 type="submit"
                                 className="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors"

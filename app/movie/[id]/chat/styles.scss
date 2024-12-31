@@ -11,8 +11,8 @@
 	position: relative;
 	max-width: 350px;
 	overflow: hidden;
-	border-left: solid 1px rgba(255, 255, 255, 0.1);
-	background-color: var(--background-color-secondary);
+	// border-left: solid 1px rgba(255, 255, 255, 0.1);
+	// background-color: var(--background-color-secondary);
 	border-radius: 6px;
 	transition: all 0.2s ease-in;
 
@@ -56,7 +56,6 @@
 		overflow-x: hidden;
 		overflow-y: auto;
 		position: relative;
-		background-color: var(--background-color-secondary);
 		transition: all 0.2s ease-in;
 
 		&::-webkit-scrollbar {
@@ -91,7 +90,7 @@
 		width: 100%;
 		padding: 15px;
 		position: relative;
-		border-top: solid 1px rgba(255, 255, 255, 0.1);
+		// border-top: solid 1px rgba(255, 255, 255, 0.1);
 
 		.chat-message-wrapper {
 			position: relative;

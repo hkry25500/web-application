@@ -23,15 +23,15 @@ export default async function MoviePage({ movie }: any)
                     {/* main col */}
                     <div className="w-full md:flex-1">
                         {/* player */}
-                        <div className="bg-black relative mb-3" style={{ paddingTop: "55%" }}>
+                        <div className="bg-black dark:bg-neutral-800 relative mb-3" style={{ paddingTop: "55%" }}>
                             <Player movie={movie} />
                         </div>
                         {/* video info */}
                         <div className="flex flex-wrap items-end pt-2">
                             {/* title */}
                             <div className="mb-4">
-                                <h1 className="text-xl text-[var(--text-color-primary)] font-bold tracking-tighter shrink-0 my-2">{ movie.title }</h1>
-                                <span className='text-sm text-[var(--text-color-secondary)]'>{ movie.description }</span>
+                                <h1 className="text-xl text-gray-950 dark:text-gray-50 font-bold tracking-tighter shrink-0 my-2">{ movie.title }</h1>
+                                <span className='text-sm text-gray-600 dark:text-gray-400'>{ movie.description }</span>
                             </div>
                             {
                                 movie.interests.map((interest: string) => {
@@ -44,7 +44,7 @@ export default async function MoviePage({ movie }: any)
                                     )
                                 })
                             }
-                            <hr className="w-full h-px bg-[var(--border-color-secondary)] border-0 m-0 my-3 " />
+                            <hr className="w-full h-px bg-[var(--border-color-secondary)] border-0 m-0 my-3" />
                         </div>
                     </div>
 

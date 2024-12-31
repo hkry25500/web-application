@@ -5,7 +5,7 @@ import { withUpperCase } from '@/lib/util/string'
 
 export async function generateMetadata()
 {
-    const header = headers()
+    const header = await headers()
     const pathname = header.get("x-current-path");
     const title = pathname?.split('/').pop();
     if (title)

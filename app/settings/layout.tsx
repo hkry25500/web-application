@@ -1,8 +1,6 @@
 'use client'
 
-import { Layout } from "antd";
 import Link from "next/link";
-import { useMediaQuery } from 'react-responsive'
 import { ProfileOutlined, ControlOutlined } from '@ant-design/icons'
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -10,12 +8,9 @@ import { WEBAPP_TITLE } from "@/shared/constants";
 import { useSession } from "next-auth/react";
 
 
-const { Sider } = Layout;
-
 export default function SettingsLayout({ children, }: Readonly<{ children: React.ReactNode; }>)
 {
     const { data, status } = useSession();
-    const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
     const pathname = usePathname();
     const [currentKey, setCurrentKey] = useState<string>('');
 
@@ -38,16 +33,15 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
 
 
     if (status !== 'authenticated') {
-        return
-            <></>
+        return <></>
     }
 
     return (
         <>
             <div id='profile-page' className='w-full'>
 
-                <div className="flex flex-wrap bg-gray-100 w-full min-h-100-70">
-                    <div className="w-2/12 bg-white rounded p-3 shadow-lg max-md:hidden">
+                <div className="flex flex-wrap bg-gray-100 dark:bg-gray-950 w-full min-h-100-70">
+                    <div className="w-2/12 bg-white dark:bg-zinc-900 rounded p-3 shadow-lg max-md:hidden">
                         <div className="flex items-center space-x-4 p-2 mb-5">
                             <img
                                 className="w-12 h-12 rounded-full object-cover"
@@ -55,7 +49,7 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                                 alt={data.user.name}
                             />
                             <div>
-                                <h4 className="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide">
+                                <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-300 capitalize font-poppins tracking-wide">
                                     {data.user.name}
                                 </h4>
                                 <span className="text-sm tracking-wide flex items-center space-x-1">
@@ -73,17 +67,17 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                                         d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
                                         />
                                     </svg>
-                                    <span className="text-gray-600">Verified</span>
+                                    <span className="text-gray-600 dark:text-gray-50">Verified</span>
                                 </span>
                             </div>
                         </div>
                         <ul className="space-y-2 text-sm">
                             <li>
                                 <Link
-                                href="dashboard"
-                                className={`flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium focus:bg-gray-100 focus:shadow-outline ${currentKey==='dashboard' ? 'bg-gray-200 hover:bg-gray-200' : 'hover:bg-gray-100'}`}
+                                href="/settings/dashboard"
+                                className={`flex items-center space-x-3 text-gray-700 dark:text-gray-300 p-2 rounded-md font-medium hover:bg-gray-100 dark:hover:bg-gray-500 focus:bg-gray-100 focus:shadow-outline ${currentKey==='dashboard' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
                                 >
-                                    <span className="text-gray-600">
+                                    <span className="text-gray-600 dark:text-gray-50">
                                         <svg
                                         className="h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -104,10 +98,10 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                             </li>
                             <li>
                                 <Link
-                                href="notifications"
-                                className={`flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-100 focus:bg-gray-100 focus:shadow-outline ${currentKey==='notifications' ? 'bg-gray-200 hover:bg-gray-200' : ''}`}
+                                href="/settings/notifications"
+                                className={`flex items-center space-x-3 text-gray-700 dark:text-gray-300 p-2 rounded-md font-medium hover:bg-gray-100 dark:hover:bg-gray-500 focus:bg-gray-100 focus:shadow-outline ${currentKey==='notifications' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
                                 >
-                                    <span className="text-gray-600">
+                                    <span className="text-gray-600 dark:text-gray-50">
                                         <svg
                                         className="h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -128,10 +122,10 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                             </li>
                             <li>
                                 <Link
-                                href="profile"
-                                className={`flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-100 focus:bg-gray-100 focus:shadow-outline ${currentKey==='profile' ? 'bg-gray-200 hover:bg-gray-200' : ''}`}
+                                href="/settings/profile"
+                                className={`flex items-center space-x-3 text-gray-700 dark:text-gray-300 p-2 rounded-md font-medium hover:bg-gray-100 dark:hover:bg-gray-500 focus:bg-gray-100 focus:shadow-outline ${currentKey==='profile' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
                                 >
-                                    <span className="text-gray-600">
+                                    <span className="text-gray-600 dark:text-gray-50">
                                         <svg
                                         className="h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -152,10 +146,10 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                             </li>
                             <li>
                                 <Link
-                                href="preferences"
-                                className={`flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-100 focus:bg-gray-100 focus:shadow-outline ${currentKey==='preferences' ? 'bg-gray-200 hover:bg-gray-200' : ''}`}
+                                href="/settings/preferences"
+                                className={`flex items-center space-x-3 text-gray-700 dark:text-gray-300 p-2 rounded-md font-medium hover:bg-gray-100 dark:hover:bg-gray-500 focus:bg-gray-100 focus:shadow-outline ${currentKey==='preferences' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
                                 >
-                                    <span className="text-gray-600">
+                                    <span className="text-gray-600 dark:text-gray-50">
                                         <svg
                                         className="h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -177,9 +171,9 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                             <li>
                                 <Link
                                 href="#"
-                                className={`flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-100 focus:bg-gray-100 focus:shadow-outline`}
+                                className={`flex items-center space-x-3 text-gray-700 dark:text-gray-300 p-2 rounded-md font-medium hover:bg-gray-100 dark:hover:bg-gray-500 focus:bg-gray-100 focus:shadow-outline`}
                                 >
-                                    <span className="text-gray-600">
+                                    <span className="text-gray-600 dark:text-gray-50">
                                         <svg
                                         className="h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -201,9 +195,9 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                             <li>
                                 <Link
                                 href="#"
-                                className={`flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-100 focus:bg-gray-100 focus:shadow-outline`}
+                                className={`flex items-center space-x-3 text-gray-700 dark:text-gray-300 p-2 rounded-md font-medium hover:bg-gray-100 dark:hover:bg-gray-500 focus:bg-gray-100 focus:shadow-outline`}
                                 >
-                                    <span className="text-gray-600">
+                                    <span className="text-gray-600 dark:text-gray-50">
                                         <svg
                                         className="h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -225,7 +219,7 @@ export default function SettingsLayout({ children, }: Readonly<{ children: React
                         </ul>
                     </div>
                     <div className="w-full md:w-10/12">
-                        <div className="py-6 px-10">
+                        <div className="px-6 py-4 md:px-10 md:py-6">
                             { children }
                         </div>
                     </div>

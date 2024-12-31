@@ -16,8 +16,8 @@ const fetchMovie = async (id: string): Promise<any> =>
     }
 }
 
-export async function generateMetadata({ params }: any)
-{
+export async function generateMetadata(props: any) {
+    const params = await props.params;
     const movie = await fetchMovie(params.id);
 
     return {
@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: any)
     }
 }
 
-export default async function MovieLayout({ params }: any)
-{
+export default async function MovieLayout(props: any) {
+    const params = await props.params;
     const movie = await fetchMovie(params.id);
 
     if (movie) {

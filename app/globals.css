@@ -30,13 +30,6 @@ body {
   margin: 0;
 }
 
-.app {
-  width: 100%;
-  min-height: 100vh;
-  background: #fff;
-  overflow-x: hidden;
-}
-
 .min-h-100-70 {
   min-height: calc(100vh - 70px) !important;
 }

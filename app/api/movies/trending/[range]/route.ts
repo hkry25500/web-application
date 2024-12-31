@@ -2,10 +2,13 @@ import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 
-export async function GET(_request: NextRequest, { params }: {
-    params: any
-})
-{
+export async function GET(
+    _request: NextRequest,
+    props: {
+        params: Promise<any>
+    }
+) {
+    const params = await props.params;
     const trending_range = parseInt(params.range) || 10;
 
     try

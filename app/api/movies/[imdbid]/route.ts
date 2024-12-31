@@ -2,9 +2,9 @@ import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(req: NextRequest)
+export async function GET(req: NextRequest, props: any)
 {
-    const imdbid = req.nextUrl.pathname.split('/').pop();
+    const imdbid = (await props.params).imdbid;
 
     try
     {

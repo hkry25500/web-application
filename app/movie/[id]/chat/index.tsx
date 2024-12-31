@@ -85,7 +85,7 @@ export default function ChatBox({ room }: any)
         <>
             {
                 isChatBoxOpen ?
-                <div className="chat-window">
+                <div className="chat-window bg-gray-100 dark:bg-neutral-800">
                     <div
                         className="close-chat"
                         onClick={() => setIsChatBoxOpen(false)}
@@ -94,11 +94,11 @@ export default function ChatBox({ room }: any)
                     >
                         <CloseSquareOutlined />
                     </div>
-                    <div className="chat-feed">
+                    <div className="chat-feed bg-gray-100 dark:bg-neutral-800">
                         {
                             messages.map(message => {
                                 return (
-                                    <p><span key={message.sender} className="name animate-appearance-in">{ message.name }</span>{ message.content }</p>
+                                    <p className='text-gray-950 dark:text-gray-50'><span key={message.sender} className="name animate-appearance-in">{ message.name }</span>{ message.content }</p>
                                 )
                             })
                         }
